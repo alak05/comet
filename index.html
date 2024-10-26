@@ -41,29 +41,22 @@
                 var data = {
                       user_prompt : prompt
                     };
-
-        fetch("https://k2shbrwu0i.execute-api.us-east-1.amazonaws.com/prod/data", {
-            method: "POST", 
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "application/json",
-                dataType: "json",
-                crossDomain: "true"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                console.log(response.statusText);
-            }
-            return response.json(); // Parse JSON response
-        })
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error("There was a problem with the fetch operation:", error);
-        });
+                $.ajax({
+                     type: "POST",
+                     url : "https://k2shbrwu0i.execute-api.us-east-1.amazonaws.com/prod",
+                     dataType: "json",
+                     crossDomain: "true",
+                     contentType: "application/json; charset=utf-8",
+                     data: JSON.stringify(data),
+                     
+                  success: function () {
+                  $("#input_text").val("");
+                },
+                error: function () {
+                  // show an error message
+                  alert("UnSuccessfull");
+                }
+                 });
 
             }
         </script>
